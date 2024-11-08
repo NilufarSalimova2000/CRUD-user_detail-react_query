@@ -1,17 +1,14 @@
-import { request } from "./config/request"
-import { useQuery } from "@tanstack/react-query"
+import { Route, Routes } from "react-router-dom"
+import { Home } from "./pages/home"
+import { UserDetail } from "./pages/user-detail"
 
 function App() {
-  const { data, isLoading, error } = useQuery({
-    queryKey: ["todos"],
-    queryFn: () => request.get("/todos").then((res) => res.data)
-  })
   return (
     <>
-      {data?.map((item) => (
-        <h1 key={item.id}>{item.title}</h1>
-      ))}
-      
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/user-detail/:id" element={<UserDetail />} />
+      </Routes>
     </>
   )
 }
